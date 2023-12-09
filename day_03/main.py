@@ -37,9 +37,13 @@ def part1() -> None:
                         neighbor = False
     print(solution)
 
+def test():
+    with open("test_input.txt", "r") as f: 
+        content = f.read().split("\n")
+    print(store_all_numbers(content))
 
 def part2() -> None:
-    with open("test_input.txt", "r") as f: 
+    with open("input.txt", "r") as f: 
         content = f.read().split("\n")
     two_nums: list[int] = []
     idx_list: list[int] = []
@@ -88,17 +92,20 @@ def store_all_numbers(content: list[str]) -> list[NumAndCor]:
                 num = num + char
                 cor_char = (idx_row, idx_char)  
                 cor.append(cor_char)
-            if is_end_list(content, idx_char):
-                if num != "" and not char.isdigit():
-                    cor_list.append(NumAndCor(num=num, cor=cor.copy()))
-                    num = ""
-                    cor.clear()
-            else:       
-                if num != "" and not char.isdigit():
-                    cor_list.append(NumAndCor(num=num, cor=cor.copy()))
-                    num = ""
-                    cor.clear()
-    return cor_list
+            if num != "" and not char.isdigit():
+                cor_list.append(NumAndCor(num=num, cor=cor.copy()))
+                num = ""
+                cor.clear()
+        cor_list.append(NumAndCor(num=num, cor=cor.copy()))
+        num = ""
+        cor.clear()
+    new_cor_list = []
+    for numandcor in cor_list:
+        if numandcor.num != '':
+            new_cor_list.append(numandcor)
+
+        
+    return new_cor_list 
 
 def get_num_by_cor(nums: list[NumAndCor], row: int, column: int) -> tuple[int, int]:
     for idx, num in enumerate(nums):
