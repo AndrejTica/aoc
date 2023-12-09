@@ -37,11 +37,6 @@ def part1() -> None:
                         neighbor = False
     print(solution)
 
-def test():
-    with open("test_input.txt", "r") as f: 
-        content = f.read().split("\n")
-    print(store_all_numbers(content))
-
 def part2() -> None:
     with open("input.txt", "r") as f: 
         content = f.read().split("\n")
@@ -103,8 +98,6 @@ def store_all_numbers(content: list[str]) -> list[NumAndCor]:
     for numandcor in cor_list:
         if numandcor.num != '':
             new_cor_list.append(numandcor)
-
-        
     return new_cor_list 
 
 def get_num_by_cor(nums: list[NumAndCor], row: int, column: int) -> tuple[int, int]:
